@@ -1,53 +1,86 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Moderna</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+const display = document.getElementById("display");
+const buttons = document.querySelectorAll(".btn");
 
-    <div class="calculator">
+let expressao = "";
 
-        <input 
-            type="text" 
-            id="display" 
-            class="display"
-            placeholder="0"
-            readonly
-        >
+/* Atualiza visor */
+function atualizarDisplay() {
+    display.value = expressao || "0";
+}
 
-        <div class="buttons">
+/* Adiciona valor */
+function adicionarValor(valor) {
+    // Evita dois operadores seguidos
+    const operadores = ["+", "-", "*", "/", "%"];
+    const ultimo = expressao.slice(-1);
 
-            <button data-action="clear" class="btn btn-clear">C</button>
-            <button data-action="delete" class="btn btn-delete">⌫</button>
-            <button data-value="%" class="btn btn-operator">%</button>
-            <button data-value="/" class="btn btn-operator">÷</button>
+    if (operadores.includes(ultimo) && operadores.includes(valor)) {
+        expressao = expressao.slice(0, -1) + valor;
+    } else {
+        expressao += valor;
+    }
 
-            <button data-value="7" class="btn btn-number">7</button>
-            <button data-value="8" class="btn btn-number">8</button>
-            <button data-value="9" class="btn btn-number">9</button>
-            <button data-value="*" class="btn btn-operator">×</button>
+    atualizarDisplay();
+}
 
-            <button data-value="4" class="btn btn-number">4</button>
-            <button data-value="5" class="btn btn-number">5</button>
-            <button data-value="6" class="btn btn-number">6</button>
-            <button data-value="-" class="btn btn-operator">−</button>
+/* Limpar */
+function limpar() {
+    expressao = "";
+    atualizarDisplay();
+}
 
-            <button data-value="1" class="btn btn-number">1</button>
-            <button data-value="2" class="btn btn-number">2</button>
-            <button data-value="3" class="btn btn-number">3</button>
-            <button data-value="+" class="btn btn-operator">+</button>
+/* Apagar */
+function apagar() {
+    expressao = expressao.slice(0, -1);
+    atualizarDisplay();
+}
 
-            <button data-value="0" class="btn btn-number btn-zero">0</button>
-            <button data-value="." class="btn btn-number">.</button>
-            <button data-action="equals" class="btn btn-equals">=</button>
+/* Calcular */
+function calcular() {
+    try {
+        if (!expressao) return;
 
-        </div>
+        let resultado = eval(expressao);
 
-    </div>
+        if (!isFinite(resultado)) {
+            display.value = "Erro";
+            expressao = "";
+            return;
+        }
 
-    <script src="script.js"></script>
-</body>
-</html>
+        expressao = resultado.toString();
+        atualizarDisplay();
+
+    } catch {
+        display.value = "Erro";
+        expressao = "";
+    }
+}
+
+/* Clique */
+buttons.forEach(botao => {
+    botao.addEventListener("click", () => {
+
+        const valor = botao.getAttribute("data-value");
+        const acao = botao.getAttribute("data-action");
+
+        if (valor) adicionarValor(valor);
+        if (acao === "clear") limpar();
+        if (acao === "delete") apagar();
+        if (acao === "equals") calcular();
+    });
+});
+
+/* Teclado */
+document.addEventListener("keydown", (event) => {
+
+    const tecla = event.key;
+
+    if (!isNaN(tecla) || "+-*/.%".includes(tecla)) {
+        adicionarValor(tecla);
+    }
+
+    if (tecla === "Enter") calcular();
+    if (tecla === "Backspace") apagar();
+    if (tecla === "Escape") limpar();
+});
