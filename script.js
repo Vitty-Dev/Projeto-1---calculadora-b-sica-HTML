@@ -3,12 +3,12 @@ const buttons = document.querySelectorAll(".btn");
 
 let expressao = "";
 
-/* Atualiza o visor */
+/* Atualiza visor */
 function atualizarDisplay() {
     display.value = expressao || "0";
 }
 
-/* Adiciona valor */
+/* Adicionar valor */
 function adicionarValor(valor) {
     expressao += valor;
     atualizarDisplay();
@@ -29,15 +29,9 @@ function apagar() {
 /* Calcular resultado */
 function calcular() {
     try {
-        if (expressao === "") return;
+        if (!expressao) return;
 
-        // Substitui símbolos visuais pelos reais
-        let expressaoCorrigida = expressao
-            .replace(/÷/g, "/")
-            .replace(/×/g, "*")
-            .replace(/−/g, "-");
-
-        let resultado = eval(expressaoCorrigida);
+        let resultado = Function("return " + expressao)();
 
         if (!isFinite(resultado)) {
             display.value = "Erro";
@@ -54,32 +48,21 @@ function calcular() {
     }
 }
 
-/* Clique nos botões */
+/* Cliques */
 buttons.forEach(botao => {
     botao.addEventListener("click", () => {
 
         const valor = botao.getAttribute("data-value");
         const acao = botao.getAttribute("data-action");
 
-        if (valor) {
-            adicionarValor(valor);
-        }
-
-        if (acao === "clear") {
-            limpar();
-        }
-
-        if (acao === "delete") {
-            apagar();
-        }
-
-        if (acao === "equals") {
-            calcular();
-        }
+        if (valor) adicionarValor(valor);
+        if (acao === "clear") limpar();
+        if (acao === "delete") apagar();
+        if (acao === "equals") calcular();
     });
 });
 
-/* Permitir digitação pelo teclado */
+/* Teclado */
 document.addEventListener("keydown", (event) => {
 
     const tecla = event.key;
@@ -88,15 +71,7 @@ document.addEventListener("keydown", (event) => {
         adicionarValor(tecla);
     }
 
-    if (tecla === "Enter") {
-        calcular();
-    }
-
-    if (tecla === "Backspace") {
-        apagar();
-    }
-
-    if (tecla === "Escape") {
-        limpar();
-    }
+    if (tecla === "Enter") calcular();
+    if (tecla === "Backspace") apagar();
+    if (tecla === "Escape") limpar();
 });
