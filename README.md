@@ -1,15 +1,15 @@
-# 🧮 Calculadora Moderna
+# Calculadora Moderna
 
 Calculadora desenvolvida com HTML, CSS e JavaScript.
 
-## ✨ Funcionalidades
+## Funcionalidades
 - Operações básicas (+, −, ×, ÷)
 - Operações encadeadas
 - Suporte a clique e teclado
 - Botão limpar e apagar
 - Tratamento de erros
 
-## 🚀 Tecnologias utilizadas
+## Tecnologias utilizadas
 - HTML5
 - CSS3
 - JavaScript
