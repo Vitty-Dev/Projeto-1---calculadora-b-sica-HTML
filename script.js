@@ -8,30 +8,39 @@ function atualizarDisplay() {
     display.value = expressao || "0";
 }
 
-/* Adicionar valor */
+/* Adiciona valor */
 function adicionarValor(valor) {
-    expressao += valor;
+    // Evita dois operadores seguidos
+    const operadores = ["+", "-", "*", "/", "%"];
+    const ultimo = expressao.slice(-1);
+
+    if (operadores.includes(ultimo) && operadores.includes(valor)) {
+        expressao = expressao.slice(0, -1) + valor;
+    } else {
+        expressao += valor;
+    }
+
     atualizarDisplay();
 }
 
-/* Limpar tudo */
+/* Limpar */
 function limpar() {
     expressao = "";
     atualizarDisplay();
 }
 
-/* Apagar último caractere */
+/* Apagar */
 function apagar() {
     expressao = expressao.slice(0, -1);
     atualizarDisplay();
 }
 
-/* Calcular resultado */
+/* Calcular */
 function calcular() {
     try {
         if (!expressao) return;
 
-        let resultado = Function("return " + expressao)();
+        let resultado = eval(expressao);
 
         if (!isFinite(resultado)) {
             display.value = "Erro";
@@ -48,7 +57,7 @@ function calcular() {
     }
 }
 
-/* Cliques */
+/* Clique */
 buttons.forEach(botao => {
     botao.addEventListener("click", () => {
 
