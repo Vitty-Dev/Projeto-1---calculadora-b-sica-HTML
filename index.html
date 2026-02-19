@@ -3,53 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Moderna - Vitória</title>
+    <title>Calculadora Moderna</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="calculator">
 
-        <div class="display-container">
-            <input 
-                type="text" 
-                id="display" 
-                class="display" 
-                placeholder="0" 
-                autocomplete="off"
-            >
-        </div>
+        <input 
+            type="text" 
+            id="display" 
+            class="display"
+            placeholder="0"
+        >
 
         <div class="buttons">
 
-            <!-- Linha 1 -->
-            <button class="btn btn-clear">C</button>
-            <button class="btn btn-delete">⌫</button>
-            <button class="btn btn-operator">%</button>
-            <button class="btn btn-operator">÷</button>
+            <button data-action="clear" class="btn btn-clear">C</button>
+            <button data-action="delete" class="btn btn-delete">⌫</button>
+            <button data-value="%" class="btn btn-operator">%</button>
+            <button data-value="/" class="btn btn-operator">÷</button>
 
-            <!-- Linha 2 -->
-            <button class="btn btn-number">7</button>
-            <button class="btn btn-number">8</button>
-            <button class="btn btn-number">9</button>
-            <button class="btn btn-operator">×</button>
+            <button data-value="7" class="btn btn-number">7</button>
+            <button data-value="8" class="btn btn-number">8</button>
+            <button data-value="9" class="btn btn-number">9</button>
+            <button data-value="*" class="btn btn-operator">×</button>
 
-            <!-- Linha 3 -->
-            <button class="btn btn-number">4</button>
-            <button class="btn btn-number">5</button>
-            <button class="btn btn-number">6</button>
-            <button class="btn btn-operator">−</button>
+            <button data-value="4" class="btn btn-number">4</button>
+            <button data-value="5" class="btn btn-number">5</button>
+            <button data-value="6" class="btn btn-number">6</button>
+            <button data-value="-" class="btn btn-operator">−</button>
 
-            <!-- Linha 4 -->
-            <button class="btn btn-number">1</button>
-            <button class="btn btn-number">2</button>
-            <button class="btn btn-number">3</button>
-            <button class="btn btn-operator">+</button>
+            <button data-value="1" class="btn btn-number">1</button>
+            <button data-value="2" class="btn btn-number">2</button>
+            <button data-value="3" class="btn btn-number">3</button>
+            <button data-value="+" class="btn btn-operator">+</button>
 
-            <!-- Linha 5 -->
-            <button class="btn btn-number btn-zero">0</button>
-            <button class="btn btn-number">.</button>
-            <button class="btn btn-equals">=</button>
+            <button data-value="0" class="btn btn-number btn-zero">0</button>
+            <button data-value="." class="btn btn-number">.</button>
+            <button data-action="equals" class="btn btn-equals">=</button>
 
         </div>
 
