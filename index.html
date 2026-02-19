@@ -2,28 +2,57 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Calculadora Dev - Vitória</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Moderna - Vitória</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="calculator">
-        <h1>Calculadora</h1>
 
-        <input type="number" id="num1" placeholder="Digite o primeiro número">
-        <input type="number" id="num2" placeholder="Digite o segundo número">
+        <div class="display-container">
+            <input 
+                type="text" 
+                id="display" 
+                class="display" 
+                placeholder="0" 
+                autocomplete="off"
+            >
+        </div>
 
         <div class="buttons">
-            <button onclick="calcular('+')">+</button>
-            <button onclick="calcular('-')">−</button>
-            <button onclick="calcular('*')">×</button>
-            <button onclick="calcular('/')">÷</button>
+
+            <!-- Linha 1 -->
+            <button class="btn btn-clear">C</button>
+            <button class="btn btn-delete">⌫</button>
+            <button class="btn btn-operator">%</button>
+            <button class="btn btn-operator">÷</button>
+
+            <!-- Linha 2 -->
+            <button class="btn btn-number">7</button>
+            <button class="btn btn-number">8</button>
+            <button class="btn btn-number">9</button>
+            <button class="btn btn-operator">×</button>
+
+            <!-- Linha 3 -->
+            <button class="btn btn-number">4</button>
+            <button class="btn btn-number">5</button>
+            <button class="btn btn-number">6</button>
+            <button class="btn btn-operator">−</button>
+
+            <!-- Linha 4 -->
+            <button class="btn btn-number">1</button>
+            <button class="btn btn-number">2</button>
+            <button class="btn btn-number">3</button>
+            <button class="btn btn-operator">+</button>
+
+            <!-- Linha 5 -->
+            <button class="btn btn-number btn-zero">0</button>
+            <button class="btn btn-number">.</button>
+            <button class="btn btn-equals">=</button>
+
         </div>
 
-        <div class="result">
-            <span>Resultado:</span>
-            <p id="resultado">0</p>
-        </div>
     </div>
 
     <script src="script.js"></script>
